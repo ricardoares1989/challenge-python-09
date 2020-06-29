@@ -1,8 +1,13 @@
+'''Module to create a solution from an expected matrix
+duplicate the zeros in the array, return a modified array.'''
 from typing import List
 
 class Solution:
-    
+    """ The class contain the function that job with the array,
+     each zero finding in the array duplicate itself"""
     def duplicate_zeros(self, arr: List[int]):
+        """The function take an array and in O(n) execution time and in place modification,
+        Return an array with duplicated zeros and deleted the values to the left for each one."""
         i = 0
         j = len(arr) - 1
         zero = 0
@@ -13,28 +18,25 @@ class Solution:
                 j -= 1
             else:
                 i += 1
-        
-        m = len(arr) -1
+        length = len(arr) -1
         while j >= 0:
-            arr[m] = arr[j]
+            arr[length] = arr[j]
             j -= 1
-            m -= 1
-        
+            length -= 1
         if zero > 0:
             for i in range(0, zero):
                 arr[i] = 0
-        
-        n = 0
-        p = m + 1
-        while p < len(arr) and zero > 0:
-            if arr[p] == 0:
+        ind_r = 0
+        ind_sw = length + 1
+        while ind_sw < len(arr) and zero > 0:
+            if arr[ind_sw] == 0:
                 zero -= 1
-                arr[p], arr[n] = arr[n], arr[p]
-                p += 1
-                n += 2
+                arr[ind_sw], arr[ind_r] = arr[ind_r], arr[ind_sw]
+                ind_sw += 1
+                ind_r += 2
             else:
-                arr[p], arr[n] = arr[n], arr[p]
-                n += 1
-                p += 1
+                arr[ind_sw], arr[ind_r] = arr[ind_r], arr[ind_sw]
+                ind_r += 1
+                ind_sw += 1
         return arr
         
